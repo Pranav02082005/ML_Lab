@@ -30,7 +30,5 @@ print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 print("Report:\n", classification_report(y_test, y_pred, target_names=["No Play","Play"]))
 
 # New test prediction
-new = pd.get_dummies(pd.DataFrame([{"Temperature":"Mild","Humidity":"Normal",
-                                     "Outlook":"Sunny","Wind":"Weak"}]))
-new = new.reindex(columns=df_enc.columns, fill_value=0)
+new = pd.DataFrame([[0,1,0,0,1,0,0,1,0,1]], columns=df_enc.columns)
 print("New sample prediction:", "Play" if model.predict(new)[0]==1 else "No Play")
