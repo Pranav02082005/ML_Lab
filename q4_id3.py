@@ -20,7 +20,7 @@ model.fit(X, y)
 print(f"\nTraining Accuracy: {accuracy_score(y, model.predict(X)):.4f}")
 
 # Predict new sample: outlook=sunny, temp=cool, humidity=high, windy=false
-new = pd.DataFrame([{"outlook":2, "temp":0, "humidity":0, "windy":0}])
+new = pd.DataFrame([[2,0,0,0]], columns=X.columns)
 pred = model.predict(new)[0]
 print(f"New sample prediction: {'Play' if pred==1 else 'No Play'}")
 
