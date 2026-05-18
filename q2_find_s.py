@@ -24,6 +24,6 @@ def find_s(df, target_col, pos_class="Yes"):
 
 h = find_s(df, "PlayTennis")
 print("Training Data:")
-print(df.to_string(index=False))
+print(df)
 print("\nMost Specific Hypothesis (FIND-S):")
-print(dict(zip(attributes, h)))
+print(h)
