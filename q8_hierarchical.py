@@ -50,28 +50,31 @@ def diana(X, n_clusters):
 diana_labels = diana(X, n_clusters=3)
 
 # ---- Plots ----
-fig, axes = plt.subplots(1, 3, figsize=(16, 5))
+linkage_matrix = linkage(X, method = "ward")
+dendrogram(linkage_matrix, no_labels=True)
+plt.title("Dendrogram")
+plt.xlabel("Data Points")
+plt.ylabel("Distance")
+plt.show()
 
-# Dendrogram (for AGNES)
-Z = linkage(X, method="ward")
-axes[0].set_title("Dendrogram (AGNES)")
-dendrogram(Z, ax=axes[0], truncate_mode="lastp", p=15)
-axes[0].set_xlabel("Samples"); axes[0].set_ylabel("Distance")
+plt.scatter(
+    X[:,0],
+    X[:,1],
+    c=agnes_labels
+)
+plt.title("Agnes Clustering")
+plt.show()
 
-# AGNES scatter
-for c in range(3):
-    mask = agnes_labels == c
-    axes[1].scatter(X[mask, 0], X[mask, 1], label=f"C{c+1}", s=30)
-axes[1].set_title("AGNES Clustering"); axes[1].legend()
-axes[1].set_xlabel("Sepal Length"); axes[1].set_ylabel("Petal Length")
+plt.scatter(
+    X[:,0],
+    X[:,1],
+    c=diana_labels
+)
+plt.title("DIANA Clustering")
+plt.show()
 
-# DIANA scatter
-for c in range(3):
-    mask = diana_labels == c
-    axes[2].scatter(X[mask, 0], X[mask, 1], label=f"C{c+1}", s=30)
-axes[2].set_title("DIANA Clustering"); axes[2].legend()
-axes[2].set_xlabel("Sepal Length"); axes[2].set_ylabel("Petal Length")
+print("AGNES Cluster Labels:")
+print(agnes_labels)
 
-plt.tight_layout(); plt.savefig("q8_hierarchical.png", dpi=100); plt.show()
-print("AGNES label counts:", {i: np.sum(agnes_labels==i) for i in range(3)})
-print("DIANA label counts:", {i: np.sum(diana_labels==i) for i in range(3)})
+print("\nDIANA Cluster Labels:")
+print(diana_labels)
