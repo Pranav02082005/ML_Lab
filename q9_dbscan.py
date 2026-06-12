@@ -5,12 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
 # READ CSV
 df = pd.read_csv("iris1.csv")
-
-# REMOVE TARGET COLUMN
-X = df.drop("Class", axis=1)
-
-# TAKE FIRST 2 FEATURES
-X = X.iloc[:, :2]
+X = df.iloc[:, :2]
 
 model1 = DBSCAN(eps=0.3,min_samples=5)
 labels1 = model1.fit_predict(X)
